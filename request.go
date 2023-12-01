@@ -32,13 +32,12 @@ func (u *URLManager) CreateURL(originalURL string) (*URLCurta, error) {
 	}
 	return &newURL, nil
 }
-func (u *URLManager) RedirectURLCurta(curtaURL string) ([]URLCurta, error) {
-	// url, err := u.db.GetURL(curtaURL)
-	// if err != nil {
-	// 	return " ", err
-	// }
-	return  u.db.GetURL(u.GetOriginalURL()), nil
-
+func (u *URLManager) GetURLCurta(curtaURL string) (URLCurta, error){
+	url, err := u.db.GetURL(curtaURL)
+	if err != nil {
+		return url, err
+	}
+	return url, nil
 }
 
 func (u *URLManager) GetURL() ([]URLCurta, error) {

@@ -90,7 +90,7 @@ func RedirectURL(w http.ResponseWriter, r *http.Request, urlManager *URLManager)
 	if err != nil {
 		fmt.Println("Erro ao registrar acesso", err)
 	}
-	urls, err := urlManager.RedirectURLCurta(originalURL)
+	urls, err := urlManager.GetOriginalURL(originalURL)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -98,7 +98,7 @@ func RedirectURL(w http.ResponseWriter, r *http.Request, urlManager *URLManager)
 	
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(urls)
-	http.Redirect(w, r, originalURL, http.StatusFound)
+	//http.Redirect(w, r, originalURL, http.StatusFound)
 
 }
 
