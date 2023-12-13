@@ -1,12 +1,15 @@
 package main
 
-import "github.com/google/uuid"
+import (
+	"log"
+	"github.com/google/uuid"
+)
 
 type URLCurta struct {
-	ID string
-	OriginalURL string
-	Contador int
-	URLEncurtada string
+	ID           string `json:"id"`
+	OriginalURL  string `json:"originalURL"`
+	Contador     int    `json:"contador"`
+	URLEncurtada string `json:"urlEncurtada"`
 }
 
 type URLManager struct {
@@ -25,18 +28,22 @@ func (u *URLManager) CreateURL(originalURL string) (*URLCurta, error) {
 		URLEncurtada: originalURL,
 		Contador: 0,
 	}
+	log.Println("Passando aqui CreateURL ", newURL)
 
 	err := u.db.SaveURL(newURL)
 	if err != nil {
 		return nil, err
 	}
+	log.Println("Passando aqui  CreateURL", newURL)
 	return &newURL, nil
 }
 func (u *URLManager) GetURLCurta(curtaURL string) (URLCurta, error){
 	url, err := u.db.GetURL(curtaURL)
+	log.Println("Passando aqui  GetURLCurta", curtaURL)
 	if err != nil {
 		return url, err
 	}
+	log.Println("Passando aqui GetURLCurta", url)
 	return url, nil
 }
 
@@ -53,6 +60,9 @@ func (u *URLManager) GetOriginalURL(id string) (string, error) {
 	if err != nil {
 		return " ", err
 	}
+	log.Println("Passando aqui GetOriginalURL", url)
+	log.Println("Passando aqui GetOriginalURL original", url.OriginalURL)
+	log.Println("Passando aqui GetOriginalURL encurtada", url.URLEncurtada)
 	return url.OriginalURL, nil
 }
 
