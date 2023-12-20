@@ -23,7 +23,7 @@ func main() {
     //     RedirectURL(w,r, urlManager) })
     http.HandleFunc("/redirect/", handleRedirect)
     http.HandleFunc("/delete", func(w http.ResponseWriter, r *http.Request) {
-        DeletURL(w, r, urlManager) })
+        DeleteURL(w, r, urlManager) })
 
     log.Println("Servidor rodando em http://localhost:8080")
     log.Fatal(http.ListenAndServe(":8080", nil))
